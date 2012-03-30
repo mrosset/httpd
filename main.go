@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/str1ngs/util/json"
 	"log"
 	"net/http"
-	"util/json"
 )
 
 type Config struct {
@@ -13,10 +13,10 @@ type Config struct {
 	Root string
 }
 
-var config = &Config{"saturn", "8080", "/home/strings/downloads"}
+var config = new(Config)
 
 func init() {
-	err := json.Write(config, "/home/strings/.httpd.json")
+	err := json.Read(config, "/home/strings/.httpd.json")
 	if err != nil {
 		log.Fatal(err)
 	}
