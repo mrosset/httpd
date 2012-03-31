@@ -5,6 +5,8 @@ import (
 	"github.com/str1ngs/util/json"
 	"log"
 	"net/http"
+	"os"
+	"path"
 )
 
 type Config struct {
@@ -13,10 +15,13 @@ type Config struct {
 	Root string
 }
 
-var config = new(Config)
+var (
+	config = new(Config)
+	home   = os.Getenv("HOME")
+)
 
 func init() {
-	err := json.Read(config, "/home/strings/.httpd.json")
+	err := json.Read(config, path.Join(home, ".httpd.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
