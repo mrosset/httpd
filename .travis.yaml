@@ -1,4 +1,4 @@
-language: erlang # wither art thou, Go?
+language: go # wither art thou, Go?
 
 install:
  - hg clone -r go.1 https://code.google.com/p/go $HOME/go
