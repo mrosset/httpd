@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/str1ngs/util/file"
 	"github.com/str1ngs/util/json"
 	"log"
 	"net/http"
@@ -30,9 +31,13 @@ func init() {
 
 func Root(w http.ResponseWriter, r *http.Request) {
 	path := "." + r.URL.Path
-	switch path {
-	case "./":
-		path = "./index.php"
+	if path == "./" {
+		switch {
+		case file.Exists("./index.html"):
+			path = "./index.html"
+		case file.Exists("./index.php"):
+			path = "./index.php"
+		}
 	}
 	fmt.Println(path)
 	if filepath.Ext(path) == ".php" {
@@ -59,19 +64,11 @@ func phpHandle(w http.ResponseWriter, r *http.Request, path string) {
 func main() {
 	var (
 		host = fmt.Sprintf("%s", config.Host)
-		root = config.Root
 	)
-	if root == "" {
-		root = "."
-	}
-	err := os.Chdir(root)
-	if err != nil {
-		log.Fatal(err)
-	}
 	fmt.Println(os.Getwd())
 	fmt.Printf("staring http://%s/\n", host)
 	http.HandleFunc("/", Root)
-	err = http.ListenAndServe(host, nil)
+	err := http.ListenAndServe(host, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
