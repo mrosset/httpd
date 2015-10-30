@@ -50,14 +50,14 @@ func Root(w http.ResponseWriter, r *http.Request) {
 func phpHandle(w http.ResponseWriter, r *http.Request, path string) {
 	fd, err := os.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	php := exec.Command("php")
 	php.Stdin = fd
 	php.Stdout = w
 	err = php.Run()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
 
@@ -70,6 +70,6 @@ func main() {
 	http.HandleFunc("/", Root)
 	err := http.ListenAndServe(host, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 }
