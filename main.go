@@ -39,7 +39,7 @@ func Root(w http.ResponseWriter, r *http.Request) {
 			path = "./index.php"
 		}
 	}
-	fmt.Println(path)
+	fmt.Println(r.RemoteAddr, path)
 	if filepath.Ext(path) == ".php" {
 		phpHandle(w, r, path)
 		return
