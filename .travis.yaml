@@ -1,1 +1,4 @@
-language: go # wither art thou, Go?
+language: go
+
+go: 
+    - 1.5
