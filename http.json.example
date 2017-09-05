@@ -1,5 +1,4 @@
 {
-        "Host": "localhost",
-        "Port": "8080",
-        "Root": "/home/strings"
+        "Host": "localhost:8080",
+        "Root": "./"
 }

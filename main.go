@@ -13,17 +13,15 @@ import (
 
 type Config struct {
 	Host string
-	Port string
 	Root string
 }
 
 var (
 	config = new(Config)
-	home   = os.Getenv("HOME")
 )
 
 func init() {
-	err := json.Read(config, filepath.Join(home, ".httpd.json"))
+	err := json.Read(config, filepath.Join(os.Getenv("HOME"), ".httpd.json"))
 	if err != nil {
 		log.Fatal(err)
 	}
